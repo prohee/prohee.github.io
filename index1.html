@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>경제와 고령화 문제</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        button {
+            display: block;
+            margin: 10px auto;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            border: 1px solid #ccc;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 80%;
+            max-width: 400px;
+            padding: 20px;
+            text-align: left;
+            z-index: 1000;
+        }
+        .modal h2 {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        .modal p {
+            margin-bottom: 20px;
+        }
+        .modal button {
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            padding: 5px 10px;
+        }
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+    </style>
+</head>
+<body>
+    <h1>경제와 고령화 문제</h1>
+    <button onclick="showModal('aging')">고령화의 문제</button>
+    <button onclick="showModal('gdp')">GDP란?</button>
+    <button onclick="showModal('economic')">경제성장에 영향을 주는 속성</button>
+    <button onclick="viewGraph()">그래프 보기</button>
+
+    <div id="overlay" class="overlay"></div>
+
+    <div id="aging" class="modal">
+        <h2>고령화의 문제</h2>
+        <p>고령화는 노동 인구 감소, 사회 보장 비용 증가 등의 문제를 초래합니다.</p>
+        <button onclick="closeModal()">닫기</button>
+    </div>
+
+    <div id="gdp" class="modal">
+        <h2>GDP란?</h2>
+        <p>GDP는 한 나라의 경제 규모를 나타내는 주요 지표로, 국내 총생산을 의미합니다.</p>
+        <button onclick="closeModal()">닫기</button>
+    </div>
+
+    <div id="economic" class="modal">
+        <h2>경제성장에 영향을 주는 속성</h2>
+        <p>기술 혁신, 투자, 교육 수준, 인프라 등이 경제성장에 영향을 미칩니다.</p>
+        <button onclick="closeModal()">닫기</button>
+    </div>
+
+    <script>
+        function showModal(id) {
+            document.getElementById('overlay').style.display = 'block';
+            document.getElementById(id).style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('overlay').style.display = 'none';
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => modal.style.display = 'none');
+        }
+
+        function viewGraph() {
+            window.location.href = 's.html';
+        }
+    </script>
+</body>
+</html>
+
