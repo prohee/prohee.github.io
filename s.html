@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projected GDP Growth</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>Projected GDP Growth Over Time with Aging Population</h1>
+    <canvas id="gdpChart" width="800" height="400"></canvas>
+
+    <script>
+        const years = Array.from({length: 31}, (_, i) => 2020 + i);
+        const populationGrowthRate = -0.01;
+        const agingPopulationRatio = Array.from({length: 31}, (_, i) => 0.2 + (i / 30) * 0.2);
+        const laborForceParticipationRate = Array.from({length: 31}, (_, i) => 0.7 - (i / 30) * 0.1);
+        const productivityGrowthRate = 0.02;
+
+        let initialGDP = 1000;
+        const gdpGrowth = [];
+
+        years.forEach((year, index) => {
+            const gdpGrowthRate = (1 + productivityGrowthRate) * 
+                                  (1 + laborForceParticipationRate[index]) * 
+                                  (1 + agingPopulationRatio[index]);
+            initialGDP *= gdpGrowthRate;
+            gdpGrowth.push(initialGDP);
+        });
+
+        const ctx = document.getElementById('gdpChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: years,
+                datasets: [{
+                    label: 'GDP Growth',
+                    data: gdpGrowth,
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Projected GDP Growth Over Time with Aging Population'
+                    }
+                },
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Year'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'GDP'
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
